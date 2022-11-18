@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
+use App\Models\User;
 use Carbon\Carbon;
 
 class UsersController extends Controller
@@ -18,11 +19,11 @@ class UsersController extends Controller
  
     public function index()
     {
-        $date_now = Carbon::now();
-        $date_parse = Carbon::parse(now());
+        // $date_now = Carbon::now();
+        // $date_parse = Carbon::parse(now());
 
-        $e_all = Admin::all();
-        $q_get =  DB::table('admins')->select('name', 'created_at')->get();
+        // $e_all = Admin::all();
+        // $q_get =  DB::table('admins')->select('name', 'created_at')->get();
         // $q_first = DB::table('admins')->select('name')->first();
 
         // $c_test = collect([
@@ -30,7 +31,9 @@ class UsersController extends Controller
         // ]);
 
         // dd($e_all, $q_get, $q_first, $c_test);
-        return view('admin.users.index',compact('e_all','q_get'));
+        $users = User::select('name', 'email', 'created_at')->get();
+        return view('admin.users.index',
+        compact('users'));
     }
 
     /**
