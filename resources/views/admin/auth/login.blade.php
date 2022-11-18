@@ -2,11 +2,9 @@
     <x-auth-card>
         管理者用
         <x-slot name="logo">
-            <div style="width:50%; margin:auto;">
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
-            </div>
         </x-slot>
 
         <!-- Session Status -->
