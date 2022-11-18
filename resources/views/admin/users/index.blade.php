@@ -9,7 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    ユーザー一覧だよ
+                    エロクアント
+                    @foreach ( $e_all as $e_admin)
+                        {{ $e_admin->name }}
+                        {{ $e_admin->created_at->diffForHumans() }}                        
+                    @endforeach
+                    クエリビルダ
+                    @foreach ( $q_get as $q_admin)
+                        {{ $q_admin->name }}
+                        {{ Carbon\Carbon::parse($q_admin->created_at)->diffForHumans() }}                        
+                    @endforeach
                 </div>
             </div>
         </div>

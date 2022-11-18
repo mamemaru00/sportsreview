@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Admin;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function __construct()
     {
@@ -20,7 +18,19 @@ class UsersController extends Controller
  
     public function index()
     {
-        dd('ユーザー一覧です');
+        $date_now = Carbon::now();
+        $date_parse = Carbon::parse(now());
+
+        $e_all = Admin::all();
+        $q_get =  DB::table('admins')->select('name', 'created_at')->get();
+        // $q_first = DB::table('admins')->select('name')->first();
+
+        // $c_test = collect([
+        //     'name' => 'テスと'
+        // ]);
+
+        // dd($e_all, $q_get, $q_first, $c_test);
+        return view('admin.users.index',compact('e_all','q_get'));
     }
 
     /**
