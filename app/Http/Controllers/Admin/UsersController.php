@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class UsersController extends Controller
 {
@@ -31,7 +33,7 @@ class UsersController extends Controller
         // ]);
 
         // dd($e_all, $q_get, $q_first, $c_test);
-        $users = User::select('name', 'email', 'created_at')->get();
+        $users = User::select('id', 'name', 'email', 'created_at')->get();
         return view('admin.users.index',
         compact('users'));
     }
@@ -54,7 +56,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect()->route('admin.users.index')
+        ->with('message', 'オーナー登録を実施しました');
     }
 
     /**
@@ -76,7 +90,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -88,7 +103,16 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()
+        ->route('admin.users.index')
+        ->with(['message' => 'オーナー情報を更新しました。',
+        'status' => 'info']);
     }
 
     /**
