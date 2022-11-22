@@ -34,7 +34,7 @@
                     @else
                         {{ $paginator->count() }}
                     @endif
-                    件
+                    件を表示
                 </p>
             </div>
 
