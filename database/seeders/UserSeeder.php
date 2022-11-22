@@ -29,11 +29,29 @@ class UserSeeder extends Seeder
                 'created_at' => '2022/01/01 11:11:11',
             ],
             [
+                'name' => 'test4',
+                'email' => 'test@4test.com',
+                'password' => Hash::make('password123'),
+                'created_at' => '2022/01/01 11:11:11',
+            ],
+            [
+                'name' => 'test5',
+                'email' => 'test@5test.com',
+                'password' => Hash::make('password123'),
+                'created_at' => '2022/01/01 11:11:11',
+            ],
+            [
+                'name' => 'test6',
+                'email' => 'test@6test.com',
+                'password' => Hash::make('password123'),
+                'created_at' => '2022/01/01 11:11:11',
+            ],    
+            [
                 'name' => 'test3',
                 'email' => 'test@3test.com',
                 'password' => Hash::make('password123'),
                 'created_at' => '2022/01/01 11:11:11',
-            ],    
+            ],
          ]);
     }
 }

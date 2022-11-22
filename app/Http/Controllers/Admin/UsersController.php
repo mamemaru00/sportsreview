@@ -33,7 +33,8 @@ class UsersController extends Controller
         // ]);
 
         // dd($e_all, $q_get, $q_first, $c_test);
-        $users = User::select('id', 'name', 'email', 'created_at')->get();
+        $users = User::select('id', 'name', 'email', 'created_at')
+        ->paginate(3);
         return view('admin.users.index',
         compact('users'));
     }
