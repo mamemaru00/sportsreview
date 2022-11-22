@@ -68,7 +68,8 @@ class UsersController extends Controller
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('admin.users.index')
-        ->with('message', 'オーナー登録を実施しました');
+        ->with(['message' => 'オーナー情報を更新しました。',
+        'status' => 'info']);
     }
 
     /**
@@ -123,6 +124,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->forceDelete(); 
+    
+        return redirect()
+        ->route('admin.users.index')
+        ->with(['message' => 'オーナー情報を削除しました。',
+        'status' => 'alert']);
     }
 }
