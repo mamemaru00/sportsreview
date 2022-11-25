@@ -20,7 +20,7 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('投稿一覧') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    <x-nav-link :href="route('admin.news')" :active="request()->routeIs('admin.news')">
                         {{ __('お知らせ記事投稿') }}
                     </x-nav-link>
                 </div>

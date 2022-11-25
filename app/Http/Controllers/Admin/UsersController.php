@@ -132,4 +132,9 @@ class UsersController extends Controller
         ->with(['message' => 'オーナー情報を削除しました。',
         'status' => 'alert']);
     }
+
+    public function newsIndex()
+    {
+        return view('admin.news');
+    }
 }

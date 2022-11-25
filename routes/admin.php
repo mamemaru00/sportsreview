@@ -26,6 +26,11 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
+Route::prefix('news')-> middleware('auth:admin')->group(function(){
+    Route::get('index', [UsersController::class, 'newsIndex'])->name('news');
+    Route::post('newspost', [UsersController::class, 'newspost'])->name('newspost');
+});
+
 Route::resource('users', UsersController::class)
 ->middleware('auth:admin');
 
